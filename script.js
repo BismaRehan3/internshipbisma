@@ -1,48 +1,31 @@
-let currentInput = '';
-let operatorUsed = false;
+let nemuIcon = document.querySelector('#menu-icon');
+let navbar = document.querySelector('.navbar');
 
-function appendNumber(number) {
-    if (operatorUsed && currentInput === '') {
-        operatorUsed = false;
-    }
-    currentInput += number;
-    updateDisplay();
+menuIcon.onclick = () => {
+    menuIcon.classList.toggle('fa-xmark');
+    navbar.classList.toggle('active')
 }
 
-function appendOperator(operator) {
-    if (!operatorUsed) {
-        currentInput += operator;
-        operatorUsed = true;
-    }
-    updateDisplay();
+
+/*================ scroll section action list ===============*/
+let sections = document.querySelectionAll('section');
+let navlinks = document.querySelectorAll('Header nav a');
+
+window.onscroll = () => {
+    sections.forEach(sec => {
+        let top = window.scrollY;
+        let offset = sec.offsetTop - 150;
+        let height = sec.offsetheight;
+        let id = src.getAttribute('Id');
+
+       if(top >= offset && top < offset + height){
+        navlinks.forEach.apply(links => {
+            links.clasList.remove('active');
+            document.querySelector('header nav a [href*-' + id + ']').classList.add('active'); 
+        });
+
+    };
+    });
 }
 
-function appendDot() {
-    if (!currentInput.includes('.')) {
-        currentInput += '.';
-        updateDisplay();
-    }
-}
 
-function calculate() {
-    try {
-        currentInput = eval(currentInput).toString();
-    } catch (error) {
-        currentInput = 'Error';
-    }
-    updateDisplay();
-}
-
-function clearDisplay() {
-    currentInput = '';
-    updateDisplay();
-}
-
-function deleteLast() {
-    currentInput = currentInput.slice(0, -1);
-    updateDisplay();
-}
-
-function updateDisplay() {
-    document.getElementById('display').value = currentInput;
-}
